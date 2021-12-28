@@ -1,6 +1,7 @@
 #!/bin/bash
+#usage bash get-kafka-topic-message-counts.sh <topic-name> <timestamp>
 echo "Topic:Partition:Offset:Count"
-for i in $(kubectl exec -it kafka-0 -c kafka -- bash -c "kafka-run-class kafka.tools.GetOffsetShell --broker-list kafka-0:9093 --time $1 --topic device-status-sqdf")
+for i in $(kubectl exec -it kafka-0 -c kafka -- bash -c "kafka-run-class kafka.tools.GetOffsetShell --broker-list kafka-0:9093 --time $2 --topic $1")
 do
   topic=$(echo $i|cut -d ":" -f 1)
   partition=$(echo $i|cut -d ":" -f 2)
